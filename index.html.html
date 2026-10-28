@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Liv’s Space</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--rose:#e0267a;--hot:#ff4d94;--blush:#ffe3ef;--ink:#2b0a1c;--mute:#8a5a73;--card:rgba(255,246,250,.9);--line:rgba(224,38,122,.22);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);min-height:100%;background:#000}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:"Plus Jakarta Sans",system-ui,sans-serif;line-height:1.55;background:linear-gradient(170deg,#ffb3d3 0%,#ff4d94 24%,#a3125a 55%,#2a0418 80%,#000 100%) fixed}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#ffb3d3;z-index:10}
+main{max-width:640px;margin:0 auto;padding:14px 12px 60px}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;margin:0}
+.card{background:var(--card);border-radius:20px;padding:16px;margin-top:12px;box-shadow:0 8px 30px rgba(60,0,30,.25);backdrop-filter:blur(8px)}
+.profile{padding:0;overflow:hidden}
+.banner{height:130px;background:radial-gradient(circle at 20% 30%,#ffb3d3,transparent 55%),linear-gradient(120deg,#e0267a,#2a0418);position:relative}
+.banner svg{position:absolute;right:14px;top:10px;width:90px;opacity:.9;animation:sway 6s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(6deg)}}
+@media (prefers-reduced-motion:reduce){.banner svg{animation:none}}
+.pbody{padding:0 16px 16px}
+.avatar{width:86px;height:86px;border-radius:50%;border:4px solid #fff;margin-top:-43px;background:linear-gradient(135deg,#ffb3d3,#e0267a);display:grid;place-items:center;font:600 2.3rem "Playfair Display",serif;color:#fff}
+.pbody h1{font-size:1.9rem;margin-top:6px;font-style:italic}
+.handle,.mute{color:var(--mute);font-size:.92rem}
+.bio{margin:8px 0 0}
+.presence{background:#2a0418;color:#fff;margin-top:14px;border-radius:16px;padding:14px;display:grid;gap:10px}
+.presence .row{display:flex;gap:12px;align-items:center}
+.presence .ico{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#ff4d94,#7a1245);display:grid;place-items:center;font-size:1.3rem;flex:none}
+.presence small{color:#ffb3d3;display:block;font-size:.8rem}
+.presence b{display:block;overflow-wrap:anywhere}
+.note{background:rgba(255,255,255,.12);border-radius:14px;padding:8px 12px;font-style:italic}
+.btn{background:var(--rose);color:#fff;border:0;border-radius:99px;padding:8px 20px;font:700 .95rem "Plus Jakarta Sans",sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:none;color:var(--rose);border:1.5px solid var(--rose)}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+input,textarea{width:100%;font:inherit;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px}
+textarea{resize:vertical}
+label{display:block;font-size:.85rem;color:var(--mute);margin:8px 0 3px}
+.tabs{display:flex;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin-top:12px;background:var(--card);border-radius:99px;padding:5px;gap:4px;box-shadow:0 6px 20px rgba(60,0,30,.2)}
+.tabs button{flex:1;border:0;background:none;border-radius:99px;padding:8px 4px;font:700 .85rem "Plus Jakarta Sans",sans-serif;color:var(--mute);cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--rose);color:#fff}
+.row2{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.moods button{background:none;border:1.5px solid var(--line);border-radius:99px;font-size:1.1rem;padding:3px 8px;cursor:pointer}
+.moods button.on{border-color:var(--rose);background:var(--blush)}
+.post{border-bottom:1px solid var(--line);padding:12px 0}
+.post:last-child{border:0}
+.post p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.post small{display:flex;justify-content:space-between;color:var(--mute);margin-top:6px}
+.post small button{background:none;border:0;color:var(--mute);cursor:pointer;font:inherit}
+.posters{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+.poster{aspect-ratio:2/3;border-radius:10px;padding:9px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;position:relative;overflow:hidden}
+.poster::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.7))}
+.poster b,.poster i{position:relative;z-index:1;font-style:normal}
+.poster b{font:600 .95rem/1.15 "Playfair Display",serif}
+.chips{display:flex;gap:6px;margin:12px 0;flex-wrap:wrap}
+.chips button{border:1.5px solid var(--rose);background:none;color:var(--rose);border-radius:99px;padding:4px 14px;font:700 .85rem "Plus Jakarta Sans",sans-serif;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--rose);color:#fff}
+.song{display:flex;gap:12px;align-items:center;padding:8px 0}
+.disc{width:46px;height:46px;border-radius:50%;flex:none;background:radial-gradient(circle,#fff 0 7px,transparent 8px),conic-gradient(#e0267a,#2a0418,#ffb3d3,#e0267a)}
+.notebook{display:grid;gap:10px}
+.docs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.docs button{flex:none;border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:6px 12px;font:600 .85rem "Plus Jakarta Sans",sans-serif;cursor:pointer;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.docs button.on{border-color:var(--rose);background:var(--blush)}
+#dtitle{font:600 1.4rem "Playfair Display",serif;border:0;border-bottom:1.5px solid var(--line);border-radius:0;padding-left:0}
+#dbody{min-height:320px;line-height:1.7;border:0;padding-left:0}
+.board{columns:2 130px;column-gap:10px;margin-top:12px}
+.pin{break-inside:avoid;margin-bottom:10px;border-radius:14px;padding:14px;color:#fff;font:600 1.05rem/1.3 "Playfair Display",serif}
+.hidden{display:none}
+footer{text-align:center;color:#ffb3d3;margin-top:30px;font-size:.9rem}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="rose" viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="#a3125a"/><circle cx="50" cy="50" r="25" fill="#ff4d94"/><path d="M50 18c20 0 32 15 28 32-3 15-19 24-34 20-13-4-18-19-10-29 7-9 20-9 25-1 4 6-1 14-9 12-5-1-6-7-2-9" fill="none" stroke="#ffe3ef" stroke-width="3.5" stroke-linecap="round"/></symbol></svg>
+<main>
+<section class="card profile">
+<div class="banner"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#rose"/></svg></div>
+<div class="pbody">
+<div class="avatar">L</div>
+<h1>Liv</h1>
+<div class="handle">@liv</div>
+<p class="bio">Soft on the outside, chaos on the inside. 🌹 Future doctor, professional comfort-show rewatcher.</p>
+<div class="presence" id="presence"></div>
+<div class="row2"><button class="btn ghost" id="editPresence">Edit status</button></div>
+<form id="pform" class="hidden">
+<label for="pl">Listening to (song)</label><input id="pl" maxlength="80">
+<label for="pa">Artist</label><input id="pa" maxlength="80">
+<label for="pg">Playing</label><input id="pg" maxlength="80">
+<label for="pn">Note</label><input id="pn" maxlength="140">
+<div class="row2"><button class="btn" type="button" id="savePresence">Save</button></div>
+</form>
+</div>
+</section>
+
+<nav class="tabs" role="tablist" id="tabs"></nav>
+
+<div id="v-posts">
+<div class="card">
+<textarea id="txt" maxlength="500" rows="3" placeholder="What’s happening?" aria-label="Write a post"></textarea>
+<div class="row2"><div class="moods" id="moods"></div><button class="btn" id="postBtn">Post</button></div>
+</div>
+<div class="card" id="feed"></div>
+</div>
+
+<div id="v-favs" class="hidden">
+<div class="card"><h3>Screen</h3>
+<div class="chips" id="wtabs"></div><div class="posters" id="posters"></div></div>
+<div class="card"><h3>Sound</h3><div id="music"></div></div>
+<div class="card"><h3>Games</h3><div class="posters" id="games" style="margin-top:10px"></div></div>
+</div>
+
+<div id="v-pin" class="hidden">
+<div class="card"><h3>Pinterest</h3>
+<p class="mute">Paste your Pinterest username or profile link and tap the button to jump straight to your boards.</p>
+<label for="puser">Username or link</label><input id="puser" placeholder="yourname or https://pinterest.com/yourname">
+<div class="row2"><button class="btn" id="openPin">Open my Pinterest</button></div></div>
+<div class="card"><h3>My board</h3>
+<label for="pinTxt">Add a pin idea</label><input id="pinTxt" maxlength="100" placeholder="quote, vibe, aesthetic...">
+<div class="row2"><button class="btn" id="addPin">Pin it</button></div>
+<div class="board" id="board"></div></div>
+</div>
+
+<div id="v-book" class="hidden">
+<div class="card notebook">
+<div class="docs" id="docs"></div>
+<input id="dtitle" placeholder="Untitled" aria-label="Title" maxlength="80">
+<textarea id="dbody" placeholder="Start writing your book, ideas, chapters..." aria-label="Document"></textarea>
+<div class="row2"><span class="mute" id="wc">0 words</span><span><button class="btn ghost" id="newDoc">New page</button> <button class="btn ghost" id="delDoc">Delete</button></span></div>
+</div>
+</div>
+<footer>made with roses and questionable sleep</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const load=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
+const save=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+// tabs
+const TABS=[["posts","Posts"],["favs","Favs"],["pin","Pinterest"],["book","Writing"]];
+function show(k){TABS.forEach(([id])=>$("v-"+id).classList.toggle("hidden",id!==k));[...$("tabs").children].forEach(b=>b.setAttribute("aria-selected",b.dataset.k===k))}
+TABS.forEach(([k,l])=>{const b=document.createElement("button");b.textContent=l;b.dataset.k=k;b.setAttribute("role","tab");b.onclick=()=>show(k);$("tabs").appendChild(b)});show("posts");
+// presence
+let pr=load("liv-presence",{song:"Your song right now",artist:"Artist name",game:"Your game",note:"vibing, do not disturb 🌹"});
+function drawPresence(){$("presence").innerHTML=`<div class="row"><div class="ico">🎧</div><div><small>Listening to</small><b>${esc(pr.song)}</b><span class="mute" style="color:#ffb3d3">${esc(pr.artist)}</span></div></div><div class="row"><div class="ico">🎮</div><div><small>Playing</small><b>${esc(pr.game)}</b></div></div><div class="note">${esc(pr.note)}</div>`}
+$("editPresence").onclick=()=>{$("pl").value=pr.song;$("pa").value=pr.artist;$("pg").value=pr.game;$("pn").value=pr.note;$("pform").classList.toggle("hidden")};
+$("savePresence").onclick=()=>{pr={song:$("pl").value,artist:$("pa").value,game:$("pg").value,note:$("pn").value};save("liv-presence",pr);drawPresence();$("pform").classList.add("hidden")};
+drawPresence();
+// posts
+const MOODS=["🌹","😭","💀","🔥","🥹","😤"];let mood=MOODS[0];
+let posts=load("liv-posts",[{t:"BROO WTF JUST HAPPENED. I cannot even explain it rn",m:"💀",d:Date.now()-36e5},{t:"rewatching my comfort show for the 6th time and I’m not even sorry",m:"🌹",d:Date.now()-864e5}]);
+MOODS.forEach(m=>{const b=document.createElement("button");b.textContent=m;b.setAttribute("aria-label","Mood "+m);b.onclick=()=>{mood=m;drawPosts()};$("moods").appendChild(b)});
+const ago=d=>{const s=(Date.now()-d)/1e3;return s<60?"just now":s<3600?Math.floor(s/60)+"m ago":s<86400?Math.floor(s/3600)+"h ago":Math.floor(s/86400)+"d ago"};
+function drawPosts(){[...$("moods").children].forEach(b=>b.classList.toggle("on",b.textContent===mood));
+$("feed").innerHTML=posts.length?posts.map((p,i)=>`<div class="post"><p>${p.m} ${esc(p.t)}</p><small><span>${ago(p.d)}</span><button data-i="${i}">Delete</button></small></div>`).join(""):'<p class="mute">Nothing here yet. Post your first thought above.</p>'}
+$("feed").onclick=e=>{const i=e.target.dataset.i;if(i!==undefined){posts.splice(+i,1);save("liv-posts",posts);drawPosts()}};
+$("postBtn").onclick=()=>{const v=$("txt").value.trim();if(!v)return;posts.unshift({t:v,m:mood,d:Date.now()});$("txt").value="";save("liv-posts",posts);drawPosts()};
+drawPosts();
+// favs
+const WATCH={Movies:[["Your fave movie",5,"#e0267a"],["Comfort rewatch",4.5,"#7a1245"],["Cry-every-time film",5,"#2a0418"],["Late night pick",4,"#ff4d94"]],Shows:[["Your fave show",5,"#7a1245"],["Binged in a weekend",4.5,"#e0267a"],["Rewatched 5 times",5,"#2a0418"]],Series:[["Your fave series",5,"#ff4d94"],["Slow burn favorite",4.5,"#2a0418"],["Finale still hurts",5,"#7a1245"]]};
+const MUSIC=[["Your fave song","Artist name"],["On repeat all week","Artist name"],["Comfort playlist anthem","Artist name"]];
+const GAMES=[["Your fave game",5,"#7a1245"],["Cozy game pick",4.5,"#e0267a"],["Currently playing",4,"#2a0418"]];
+const stars=n=>"★".repeat(Math.floor(n))+(n%1?"½":"");
+const poster=([t,r,c])=>`<div class="poster" style="background:linear-gradient(155deg,${c},#000)"><b>${t}</b><i>${stars(r)}</i></div>`;
+function wtab(k){[...$("wtabs").children].forEach(b=>b.setAttribute("aria-pressed",b.textContent===k));$("posters").innerHTML=WATCH[k].map(poster).join("")}
+Object.keys(WATCH).forEach(k=>{const b=document.createElement("button");b.textContent=k;b.onclick=()=>wtab(k);$("wtabs").appendChild(b)});wtab("Movies");
+$("music").innerHTML=MUSIC.map(([s,a])=>`<div class="song"><div class="disc"></div><div><b>${s}</b><br><span class="mute">${a}</span></div></div>`).join("");
+$("games").innerHTML=GAMES.map(poster).join("");
+// pinterest
+$("puser").value=load("liv-pinuser","");
+$("openPin").onclick=()=>{let u=$("puser").value.trim();if(!u)return;save("liv-pinuser",u);if(!/^https?:\/\//i.test(u))u="https://www.pinterest.com/"+u.replace(/^@/,"");window.open(u,"_blank","noopener")};
+const PC=["#e0267a","#7a1245","#2a0418","#ff4d94","#a3125a"];
+let pins=load("liv-pins",["“Be soft. Do not let the world make you hard.”","3am thoughts, saved for later","rainy window, one lamp, comfort movie","roses in a black vase"]);
+const drawPins=()=>{$("board").innerHTML=pins.map((p,i)=>`<div class="pin" style="background:${PC[i%5]};min-height:${90+(i*37)%70}px">${esc(p)}</div>`).join("")};
+$("addPin").onclick=()=>{const v=$("pinTxt").value.trim();if(!v)return;pins.unshift(v);$("pinTxt").value="";save("liv-pins",pins);drawPins()};drawPins();
+// notebook
+let docs=load("liv-docs",[{t:"Chapter 1",b:""}]),cur=0;
+const drawDocs=()=>{$("docs").innerHTML=docs.map((d,i)=>`<button data-i="${i}" class="${i===cur?"on":""}">${esc(d.t||"Untitled")}</button>`).join("");$("dtitle").value=docs[cur].t;$("dbody").value=docs[cur].b;wc()};
+const wc=()=>{const n=docs[cur].b.trim()?docs[cur].b.trim().split(/\s+/).length:0;$("wc").textContent=n+" words"};
+$("docs").onclick=e=>{const i=e.target.dataset.i;if(i!==undefined){cur=+i;drawDocs()}};
+$("dtitle").oninput=e=>{docs[cur].t=e.target.value;save("liv-docs",docs);const b=$("docs").children[cur];if(b)b.textContent=docs[cur].t||"Untitled"};
+$("dbody").oninput=e=>{docs[cur].b=e.target.value;save("liv-docs",docs);wc()};
+$("newDoc").onclick=()=>{docs.push({t:"New page",b:""});cur=docs.length-1;save("liv-docs",docs);drawDocs()};
+$("delDoc").onclick=()=>{if(docs.length<2){docs=[{t:"Chapter 1",b:""}]}else docs.splice(cur,1);cur=0;save("liv-docs",docs);drawDocs()};
+drawDocs();
+</script>
+</body>
+</html>
